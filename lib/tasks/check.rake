@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 task check: :environment do
   desc 'Check for in stock items'
+  #tramp
   urls = {
     'gimbals' => 'http://pirofliprc.com/New-FrSky-M9-Hall-Sensor-Gimbal-For-Taranis-X9D-X9d-Plus_p_3762.html',
     'evo' => 'http://pirofliprc.com/HyperLite-EVO-5-frame_p_3767.html',
