@@ -1,0 +1,13 @@
+global: &global
+  adapter: postgresql
+  min_messages: warning
+  encoding: unicode
+  host: localhost
+
+development:
+  database: piro_scrubber_development
+  <<: *global
+
+test:
+  database: piro_scrubber_test<%=ENV['TEST_ENV_NUMBER']%>
+  <<: *global

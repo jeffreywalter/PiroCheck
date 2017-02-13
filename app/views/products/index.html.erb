@@ -1,0 +1,40 @@
+<section class="search">
+  <div class="row">
+    <table>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Notify Count</th>
+      <th>Created At</th>
+      <th>Last Modified</th>
+      <th></th>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= link_to "URL", product.url, target: "_blank", rel: "nofollow" %></td>
+          <td><%= product.notify_count %></td>
+          <td><%= product.created_at.to_s %></td>
+          <td><%= product.updated_at.to_s %></td>
+          <td><%= link_to("Remove", product_url(product), method: :delete, class: "button") %></td>
+        <% end%>
+    </table>
+  </div>
+  <div class="row">
+    <div class="small-12 large-8 columns small-centered">
+      <div class="row">
+        <%= form_for :product, url: products_path do |f|%>
+          <div class="large-5 small-12 columns">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+          </div>
+          <div class="large-5 small-12 columns">
+            <%= f.label :url %>
+            <%= f.text_field :url %>
+          </div>
+          <div class="large-2 small-12 columns start_provision">
+            <%= f.submit class: 'new button'%>
+          </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</section>
