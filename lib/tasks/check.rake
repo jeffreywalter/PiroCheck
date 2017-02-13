@@ -9,6 +9,6 @@ task check: :environment do
     'battery' => 'http://pirofliprc.com/Pyro-Drone-Graphene-1550mAh-4S-148V-95C-Battery-w-XT60_p_3631.html'
   }
 
-  checker = PiroCheck.new(urls)
+  checker = PiroCheck.new
   checker.check
 end

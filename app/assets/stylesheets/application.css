@@ -76,6 +76,10 @@ div.start_provision{
   margin-top:25px;
 }
 
+.row {
+  max-width: 85rem;
+}
+
 pre {
   padding: 10px 15px;
 }

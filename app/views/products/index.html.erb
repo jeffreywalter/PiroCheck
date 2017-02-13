@@ -2,7 +2,6 @@
   <div class="row">
     <table>
       <th>Name</th>
-      <th>URL</th>
       <th>In Stock</th>
       <th>Notify Count</th>
       <th>Created At</th>
@@ -10,8 +9,7 @@
       <th></th>
       <% @products.each do |product| %>
         <tr>
-          <td><%= product.name %></td>
-          <td><%= link_to "URL", product.url, target: "_blank", rel: "nofollow" %></td>
+          <td><%= link_to product.name, product.url, target: "_blank", rel: "nofollow" %></td>
           <td><%= product.in_stock %></td>
           <td><%= product.notify_count %></td>
           <td><%= product.created_at.to_s %></td>
