@@ -1,17 +1,16 @@
-global: &global
+default: &default
   adapter: postgresql
-  min_messages: warning
-  encoding: unicode
-  host: localhost
+  pool: 5
+  timeout: 5000
 
 development:
+  <<: *default
   database: piro_scrubber_development
-  <<: *global
 
 test:
+  <<: *default
   database: piro_scrubber_test<%=ENV['TEST_ENV_NUMBER']%>
-  <<: *global
 
 production:
-  <<: *global
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
