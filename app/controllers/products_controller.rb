@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.order(:in_stock, :name)
   end
 
   def destroy
