@@ -13,5 +13,5 @@ test:
   <<: *global
 
 production:
-  <<: *default
+  <<: *global
   url: <%= ENV['DATABASE_URL'] %>
