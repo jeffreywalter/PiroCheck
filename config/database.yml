@@ -11,3 +11,7 @@ development:
 test:
   database: piro_scrubber_test<%=ENV['TEST_ENV_NUMBER']%>
   <<: *global
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
