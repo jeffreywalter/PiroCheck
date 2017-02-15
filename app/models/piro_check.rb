@@ -7,16 +7,15 @@ class PiroCheck
   end
 
   def check
-    products.each do |product|
+    to_notify = products.select do |product|
       if in_stock?(product)
-        # send text
         product.notify_count += 1
         product.in_stock = true
         product.save
-      else
-        # no op?
       end
     end
+
+    notifier.notify(to_notify) if to_notify.count > 0
   end
 
   def in_stock?(product)
@@ -27,5 +26,8 @@ class PiroCheck
     end
     return doc.css('div#availability').first.text == 'In Stock'
   end
-end
 
+  def notifier
+    @notifier ||= Notify.new
+  end
+end

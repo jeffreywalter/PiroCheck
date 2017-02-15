@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'nokogiri'
 gem 'pg'
 gem 'foundation-rails'
+gem 'gmail'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
