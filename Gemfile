@@ -15,6 +15,8 @@ gem 'nokogiri'
 gem 'pg'
 gem 'foundation-rails'
 gem 'gmail'
+gem 'watir'
+gem 'phantomjs'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
@@ -22,6 +24,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do

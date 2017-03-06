@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 class Notify
   attr_accessor :gmail
-  def initialize
+  def initialize(test_mode=false)
     @gmail = Gmail.connect(username, password)
+    @test_mode = test_mode
   end
 
   def notify(products)
@@ -11,7 +12,12 @@ class Notify
     email['subject'] = 'Items in stock'
     email['body'] = message(products)
 
-    email.deliver!
+    Rails.logger.debug(email.body)
+    email.deliver! unless test_mode?
+  end
+
+  def test_mode?
+    @test_mode
   end
 
   private

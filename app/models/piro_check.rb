@@ -2,8 +2,9 @@
 class PiroCheck
   attr_accessor :products
 
-  def initialize
-    @products = Product.where('notify_count < 3')
+  def initialize(products, notifier=nil)
+    @products = products
+    @notifier = notifier
   end
 
   def check
@@ -19,15 +20,38 @@ class PiroCheck
   end
 
   def in_stock?(product)
-    doc = Nokogiri::HTML(open(product.url))
-    name = doc.css('head > title').first.text
-    if name != product.name
-      product.update_attribute(:name, name)
+    Rails.logger.debug(product.url)
+    case product.url
+    when /pirofliprc/
+      doc = Nokogiri::HTML(open(product.url))
+      name = doc.css('head > title').first.text
+      if name != product.name
+        product.update_attribute(:name, name)
+      end
+      doc.css('div#availability').first.text == 'In Stock'
+    when /racedayquads/
+      shopify_in_stock?(product)
+    when /droneeclipse/
+      shopify_in_stock?(product)
+    else
+      false
     end
-    return doc.css('div#availability').first.text == 'In Stock'
   end
 
   def notifier
     @notifier ||= Notify.new
+  end
+
+  def browser
+    @browser ||= Watir::Browser.new :phantomjs
+  end
+
+  def shopify_in_stock?(product)
+    browser.goto product.url
+    name = browser.execute_script('return SPOParams.product.variants[0].name')
+    if name != product.name
+      product.update_attribute(:name, name)
+    end
+    browser.execute_script('return SPOParams.product.variants[0].inventory_quantity > 0')
   end
 end
